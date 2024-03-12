@@ -13,7 +13,7 @@ jobs:
         - name: Execute Cowsay CMD
           run: cowsay -f dragon "Run for cover, I am a DRAGON.....RAWR" >> dragon.txt
 
-        - name: Upload Dragon text file 
+        - name: Upload Dragon text file # artifact for uploading a file
           uses: actions/upload-artifact@v4
           with:
             name: dragon-text-file
@@ -33,10 +33,10 @@ jobs:
           run: grep -i "dragon" dragon.txt
 
     deploy_job_3:
-        needs: [test_job_2]
+        needs: [test_job_2] # used to run the jobs in a sequence
         runs-on: ubuntu-latest
         steps:
-        - name: Downloadoad Dragon text file 
+        - name: Downloadoad Dragon text file  # it will download the uploaded file
           uses: actions/download-artifact@v4
           with:
             name: dragon-text-file
